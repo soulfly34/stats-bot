@@ -15,8 +15,8 @@ fs.readdirSync('./commands', {encoding: 'utf8'}).filter(file => file.endsWith(".
 client.on('ready',() => {
   console.log("I'm Ready!")
   client.user.setStatus("dnd")
-  client.user.setActivity("Stats Botu Yaptırmak İçin ! Soulfly#0101", {type: 'WATCHING'})
-}) // bu mesajı silme !!
+  client.user.setActivity("Stats Bot & Soulfly#1111", {type: 'WATCHING'})
+}) 
 
  client.on('message', async function(message){
     let prefix = "!";
@@ -32,12 +32,6 @@ client.on('message', async(message) => {
   if(!message.guild || message.author.bot || message.content.startsWith("!")) return;
   db.add(`messageData.${message.author.id}.channel.${message.channel.id}`, 1);
   db.push(`messageData.${message.author.id}.times`, {time: Date.now(), puan: 1})
-  let dataOne = db.get(`messageData.${message.author.id}`) || {}
-  let dataMessage =  Object.keys(dataOne).map(data => { return Object.values(dataOne[data]).reduce((a, b) => a + b, 0) })[0];
-
-  let dataTwo = db.get(`voiceData.${message.author.id}`) || {}
-  let dataVoice =  Object.keys(dataTwo).map(data => { return Object.values(dataTwo[data]).reduce((a, b) => a + b, 0) })[0];
-
 })
 
 const Activites = new Map();
@@ -47,7 +41,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
   if(!oldState.channelID && newState.channelID) { 
     Activites.set(oldState.id, Date.now());
   }
-      let data;
+    let data;
     if(!Activites.has(oldState.id)){
         data = Date.now();
         Activites.set(oldState.id, data); 
